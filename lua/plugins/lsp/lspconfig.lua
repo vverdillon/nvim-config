@@ -124,5 +124,56 @@ return {
                 },
             },
         })
+
+        -- Harper LSP configuration
+        -- Harper LSP configuration
+        vim.lsp.config['*'] = {
+            capabilities = { textDocument = { semanticTokens = { multilineTokenSupport = true } } },
+            root_markers = { '.git' },
+        }
+        vim.diagnostic.config({ virtual_lines = true })
+
+        -- Harper specific setup
+        vim.lsp.config['harper'] = {
+            cmd = { 'harper-ls', '--stdio' },
+            filetypes = { 'markdown', 'text', 'tex', 'typst' },
+            settings = {
+                ["harper-ls"] = {
+                    -- Dictionnaire utilisateur (global, tous projets)
+                    userDictPath = "~/.config/nvim/harper/dict.txt",
+                    -- Dictionnaire de workspace (spécifique au projet, versionnable)
+                    workspaceDictPath = ".harper-dictionary.txt",
+                    -- Dictionnaire local au fichier (mots valides uniquement dans ce fichier)
+                    fileDictPath = "",
+
+                    -- Variante d'anglais (British, American, Canadian, Australian, Indian)
+                    dialect = "British",
+
+                    -- Sévérité affichée pour les diagnostics Harper
+                    diagnosticSeverity = "hint",
+
+                    -- Active/désactive certaines règles si besoin
+                    linters = {
+                        SpellCheck = true,
+                        SentenceCapitalization = true,
+                        RepeatedWords = true,
+                        LongSentences = false,
+                    },
+                },
+            },
+        }
+        vim.lsp.enable('harper')
+
+        -- Raccourci dédié pour parcourir/appliquer les suggestions Harper (mot sous le curseur)
+        vim.keymap.set("n", "<leader>as", vim.lsp.buf.code_action, { desc = "Harper: suggestions orthographe/grammaire" })
+        -- Raccourci dédié pour ajouter un mot au dictionnaire utilisateur Harper (mot sous le curseur)
+        vim.keymap.set("n", "<leader>ad", function()
+            vim.lsp.buf.code_action({
+                filter = function(action)
+                    return action.title:lower():find("dictionary") ~= nil
+                end,
+                apply = true, -- applique directement si une seule action correspond
+            })
+        end, { desc = "Harper: ajouter le mot au dictionnaire" })
     end,
 }

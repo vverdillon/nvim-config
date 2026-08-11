@@ -51,8 +51,9 @@ return {
                 "svelte",
                 "ts_ls",
                 "tinymist",
-                "verible", -- SystemVerilog
+                "verible",   -- SystemVerilog
                 "yamlls",
+                "harper-ls", -- grammar
             },
         })
     end,

@@ -14,7 +14,7 @@ return {
         "https://github.com/saadparwaiz1/cmp_luasnip",     -- ajoute LuaSnip à l'autocompletion
         "https://github.com/rafamadriz/friendly-snippets", -- collection de snippets pratiques
         "https://github.com/hrsh7th/cmp-emoji",            -- complétion d'émojis à la saisie de :
-        "ohttps://github.com/nsails/lspkind.nvim",         -- vs-code pictogrammes
+        "https://github.com/nsails/lspkind.nvim",         -- vs-code pictogrammes
     },
     config = function()
         local cmp = require("cmp")
