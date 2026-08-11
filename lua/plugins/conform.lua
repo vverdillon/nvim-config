@@ -1,5 +1,5 @@
 return {
-    "stevearc/conform.nvim",
+    "https://github.com/stevearc/conform.nvim",
     opts = {},
     event = { "BufReadPre", "BufNewFile" },
     config = function()
@@ -29,25 +29,11 @@ return {
             formatters = {
                 ["clang-format"] = { prepend_args = { "--style={IndentWidth: 4}" } },
                 stylua = { prepend_args = { "--indent-type", "Spaces", "--indent-width", "4" } },
-                -- CVA6 de merde
-                ruff_format = {
-                    prepend_args = {
-                        "--config", "indent-width = 2",
-                        "--config", "line-length = 100" }
-                },
             },
             format_on_save = {
                 lsp_fallback = true,
                 timeout_ms = 500,
             },
         })
-
-        vim.keymap.set({ "n", "v" }, "<leader>mp", function()
-            conform.format({
-                lsp_format = "fallback",
-                async = false,
-                timeout_ms = 1000,
-            })
-        end, { desc = "Format file or range (in visual mode)" })
     end,
 }

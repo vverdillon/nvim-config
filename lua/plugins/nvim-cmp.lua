@@ -1,20 +1,20 @@
 return {
-    "hrsh7th/nvim-cmp",
+    "https://github.com/hrsh7th/nvim-cmp",
     event = { "InsertEnter", "CmdlineEnter" },
     dependencies = {
-        "hrsh7th/cmp-buffer",  -- source pour compléter le texte déjà présent dans le buffer
-        "hrsh7th/cmp-path",    -- source pour compléter les chemins des fichiers
-        "hrsh7th/cmp-cmdline", -- source pour les completions de la cmdline de vim
+        "https://github.com/hrsh7th/cmp-buffer",  -- source pour compléter le texte déjà présent dans le buffer
+        "https://github.com/hrsh7th/cmp-path",    -- source pour compléter les chemins des fichiers
+        "https://github.com/hrsh7th/cmp-cmdline", -- source pour les completions de la cmdline de vim
         {
-            "L3MON4D3/LuaSnip",
+            "https://github.com/L3MON4D3/LuaSnip",
             -- follow latest release.
             version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
             build = "make install_jsregexp",
         },
-        "saadparwaiz1/cmp_luasnip",     -- ajoute LuaSnip à l'autocompletion
-        "rafamadriz/friendly-snippets", -- collection de snippets pratiques
-        "hrsh7th/cmp-emoji",            -- complétion d'émojis à la saisie de :
-        "onsails/lspkind.nvim",         -- vs-code pictogrammes
+        "https://github.com/saadparwaiz1/cmp_luasnip",     -- ajoute LuaSnip à l'autocompletion
+        "https://github.com/rafamadriz/friendly-snippets", -- collection de snippets pratiques
+        "https://github.com/hrsh7th/cmp-emoji",            -- complétion d'émojis à la saisie de :
+        "ohttps://github.com/nsails/lspkind.nvim",         -- vs-code pictogrammes
     },
     config = function()
         local cmp = require("cmp")

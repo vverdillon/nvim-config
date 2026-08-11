@@ -1,6 +1,6 @@
 return {
-    "nvim-lualine/lualine.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
+    "https://github.com/nvim-lualine/lualine.nvim",
+    dependencies = { "https://github.com/nvim-tree/nvim-web-devicons" },
     config = function()
         local lualine = require("lualine")
         local lazy_status = require("lazy.status") -- affiche le nombre de mise à jour plugins lazy dans la barre
@@ -10,8 +10,8 @@ return {
             options = {
                 icons_enabled = true,
                 theme = "auto",
-                component_separators = { left = "", right = "" },
-                section_separators = { left = "", right = "" },
+                component_separators = { left = "│", right = "│" },
+                section_separators = { left = "", right = "" },
                 disabled_filetypes = {
                     statusline = {},
                     winbar = {},

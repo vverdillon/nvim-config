@@ -1,5 +1,25 @@
+-- config Python
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "python" },
+    callback = function()
+        vim.treesitter.start()
+    end,
+})
+
+-- config SystemVerilog
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "systemverilog", "verilog" },
+    callback = function()
+        -- vim.opt_local.tabstop = 2
+        -- vim.opt_local.shiftwidth = 2
+        -- vim.opt_local.softtabstop = 2
+        -- vim.opt_local.expandtab = true
+        vim.treesitter.start()
+    end,
+})
+
 return {
-    "nvim-treesitter/nvim-treesitter",
+    "https://github.com/nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     config = function()
         local treesitter = require("nvim-treesitter")
@@ -30,9 +50,11 @@ return {
                 "markdown",
                 "markdown_inline",
                 "python",
+                "regex",
                 "rst",
                 "rust",
                 "systemverilog",
+                "toml",
                 "typescript",
                 "vim",
                 "yaml",

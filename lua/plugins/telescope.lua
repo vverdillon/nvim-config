@@ -1,15 +1,14 @@
 return {
-    "nvim-telescope/telescope.nvim",
+    "https://github.com/nvim-telescope/telescope.nvim",
     branch = "0.1.x",
     dependencies = {
-        "nvim-lua/plenary.nvim",
-        -- fzf implémentation en C pour plus de rapidité
-        { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-        "nvim-tree/nvim-web-devicons",
+        "https://github.com/nvim-lua/plenary.nvim",
+        -- fzf implemented in C, faster
+        { "https://github.com/nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+        "https://github.com/nvim-tree/nvim-web-devicons",
     },
     config = function()
         local telescope = require("telescope")
-        local actions = require("telescope.actions")
 
         telescope.setup({
             defaults = {
@@ -23,69 +22,34 @@ return {
                         preview_width = 0.50,
                         results_width = 0.50,
                     },
-                    vertical = {
-                        mirror = true,
-                    },
-
-                    width = 0.80,
-                    height = 0.80,
-                    preview_cutoff = 120,
                 },
 
-                -- Parce que c'est joli
-                prompt_prefix = "> ",
-                selection_caret = "> ",
-                path_display = { "smart" },
+                -- path_display = { "smart" }, -- reduce path size
                 file_ignore_patterns = { ".git/", "node_modules" },
-
-                mappings = {
-                    i = {
-                        ["<C-j>"] = actions.move_selection_next,
-                        ["<C-k>"] = actions.move_selection_previous,
-                    },
-                },
 
                 -- telescope dans preview qui marche pas avec treesitter
                 preview = {
                     treesitter = false,
                 },
             },
+
+            extensions = {
+                fzf = {
+                    fuzzy = true,                   -- false force la recherche exacte
+                    override_generic_sorter = true, -- remplace le sorter générique
+                    override_file_sorter = true,    -- remplace le sorter de fichiers
+                    case_mode = "smart_case",       -- "smart_case", "ignore_case" ou "respect_case"
+                },
+            },
         })
 
-        telescope.load_extension("fzf")
-
         -- set keymaps
-        local keymap = vim.keymap -- for conciseness
+        vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>")
+        vim.keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>")
+        vim.keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>")
+        vim.keymap.set("n", "<leader>fx", "<cmd>Telescope grep_string<cr>")
+        vim.keymap.set("n", "<leader>fd", "<cmd>Telescope diagnostics<cr>")
 
-        keymap.set(
-            "n",
-            "<leader>ff",
-            "<cmd>Telescope find_files<cr>",
-            { desc = "Recherche de chaînes de caractères dans les noms de fichiers" }
-        )
-        keymap.set(
-            "n",
-            "<leader>fg",
-            "<cmd>Telescope live_grep<cr>",
-            { desc = "Recherche de chaînes de caractères dans le contenu des fichiers" }
-        )
-        keymap.set(
-            "n",
-            "<leader>fb",
-            "<cmd>Telescope buffers<cr>",
-            { desc = "Recherche de chaînes de caractères dans les noms de buffers" }
-        )
-        keymap.set(
-            "n",
-            "<leader>fx",
-            "<cmd>Telescope grep_string<cr>",
-            { desc = "Recherche de la chaîne de caractères sous le curseur" }
-        )
-        keymap.set(
-            "n",
-            "<leader>lg",
-            "<cmd>Telescope live_grep<cr>",
-            { desc = "Recherche de chaînes de caractères dans le contenu des fichiers" }
-        )
+        telescope.load_extension("fzf")
     end,
 }

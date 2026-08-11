@@ -1,8 +1,8 @@
 return {
-    "windwp/nvim-autopairs",
+    "https://github.com/windwp/nvim-autopairs",
     event = { "InsertEnter" },
     dependencies = {
-        "hrsh7th/nvim-cmp",
+        "https://github.com/hrsh7th/nvim-cmp",
     },
     config = function()
         -- import nvim-autopairs

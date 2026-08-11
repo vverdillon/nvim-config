@@ -1,8 +1,6 @@
 return {
-    "lewis6991/gitsigns.nvim",
-    event = { "BufReadPre", "BufNewFile" },
+    "https://github.com/lewis6991/gitsigns.nvim",
     opts = {
-
         signs = {
             add          = { text = '┃' },
             change       = { text = '┃' },
@@ -57,9 +55,6 @@ return {
             map("n", "<leader>hD", function()
                 gs.diffthis("~")
             end, "Diff this ~")
-
-            -- Text object
-            map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "Gitsigns select hunk")
         end,
     },
 }
